@@ -19,7 +19,8 @@ class APIDataService: NSObject {
   }
  
   private let makeSingleQuoteURL: (String) -> URL = { symbol in
-    return URL(string:"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=\(symbol)&apikey=\(keys.api_advantage_key)")!
+    return
+      URL(string:"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=\(symbol)&apikey=\(keys.api_advantage_key)")!
   }
   
   
@@ -30,9 +31,10 @@ class APIDataService: NSObject {
     let task = URLSession.shared.dataTask(with: url ) { data, response, error in
       if let data = data {
         let jsonDecoder = JSONDecoder()
-        let quoteData = try! jsonDecoder.decode(Response.self, from: data)
-        
+        do {
+        let quoteData = try jsonDecoder.decode(Response.self, from: data)
         completion(quoteData)
+        } catch {print(error)}
       }
     }
     task.resume()
@@ -43,6 +45,7 @@ class APIDataService: NSObject {
     let url = MakeCurrencyEchangeURL(fromCurrency, ToCurrency)
     URLSession.shared.dataTask(with: url ) { data, response, error in
       if let data = data {
+        
         let jsonDecoder = JSONDecoder()
         let currencyData = try! jsonDecoder.decode(Currencies.self, from: data)
   

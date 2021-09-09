@@ -27,13 +27,24 @@ class QuotesViewModel : NSObject {
     }
     
     func callFuncToGetQuoteData()  {
-    print ("i callFuncToGetQuoteData")
+    // print ("i callFuncToGetQuoteData")
      // self.DataService.getSingleQuote {(quoteData) in print (quoteData) ; self.quoteData = quoteData  }
       
-      self.DataService.getSingleQuote ( symbol: "AAPL", completion: {(quoteData) in print(quoteData); self.quoteData = quoteData  } )
+      self.DataService.getSingleQuote ( symbol: "AAPL", completion: {(quoteData) in print(quoteData.globalQuote.symbol,quoteData.globalQuote.latestTradingDay)
+          self.quoteData = quoteData  } )
       
     }
     
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
 }
 
 

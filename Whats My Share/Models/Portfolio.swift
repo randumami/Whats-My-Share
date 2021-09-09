@@ -7,10 +7,14 @@
 
  import Foundation
 
+
+
 struct  Portfolio {
   let shareSymbol     : String
-  let shareDateBought : Date
-  let sharesBought    : Int
-  let sharePrice      : Double
-  
-}
+  let shareDateBought : String
+  let sharesBought    : String
+  let sharePrice      : String
+  }
+
+
+//TODO: noget kode til at gemme array if struct.

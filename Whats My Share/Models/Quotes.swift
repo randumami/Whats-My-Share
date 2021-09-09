@@ -7,6 +7,7 @@
 
  import Foundation
 
+
 // MARK: - Response - Toplevel
 struct Response: Codable {
     let globalQuote: Quote
@@ -14,7 +15,9 @@ struct Response: Codable {
     enum CodingKeys: String, CodingKey {
         case globalQuote = "Global Quote"
     }
-}  // MARK: - Quote
+}
+
+// MARK: - Quote
 struct Quote: Codable {
     let symbol, open, high, low: String
     let price, volume, latestTradingDay, previousClose: String
@@ -33,31 +36,6 @@ struct Quote: Codable {
         case changePercent = "10. change percent"
     }
 }
-
-class Observable<ObservedType>{
-
-    private var _value : ObservedType?
-    var valueChanged : ((ObservedType?) -> () )?
-    
-    init(_ value : ObservedType) {
-      _value = value
-    }
-    
-    public var value: ObservedType?{
-      get {
-        return _value
-      }
-      set {
-        _value = newValue
-        valueChanged?(_value)
-      }
-    }
-    
-    func bindingChanged(to newValue: ObservedType) {
-      _value = newValue
-      print ("value er: \(newValue)")
-    }
-  }
 
 /*
  Quote Endpoint

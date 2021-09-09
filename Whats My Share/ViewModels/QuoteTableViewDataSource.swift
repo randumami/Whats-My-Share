@@ -8,9 +8,16 @@
 import Foundation
 import UIKit
 
-class QuoteTableViewDataSource: NSObject, UITableViewDataSource {
+class QuoteTableViewDataSource <T>: NSObject, UITableViewDataSource {
     
-  var objects = [Any]()
+  var objects : [T]
+  
+  
+  init( objects : [T] ) {
+          //self.cellIdentifier = cellIdentifier
+          self.objects =  objects
+          //self.configureCell = configureCell
+      }
   
   // MARK: - Table View
    func numberOfSections(in tableView: UITableView) -> Int {
