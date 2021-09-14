@@ -8,7 +8,7 @@
  import Foundation
 
 
-// MARK: - Response - Toplevel
+// MARK: - Response
 struct Response: Codable {
     let globalQuote: Quote
     
@@ -38,6 +38,7 @@ struct Quote: Codable {
 }
 
 /*
+ example answer from server:
  Quote Endpoint
  https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo
  {

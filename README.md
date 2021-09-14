@@ -12,3 +12,8 @@ struct keys {
 static var api_advantage_key = "YOURKEYHERE"
 }
 
+
+ToDO:
+
+Save the portfolio
+
