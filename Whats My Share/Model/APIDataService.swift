@@ -4,10 +4,16 @@
 //
 //  Created by Søren Randum on 05/09/2021.
 //
-/*
+/**
  using service from fra www.alphavantage.co
  up to 5 API requests per minute and 500 requests per day
  get a key here https://www.alphavantage.co/support/#api-key
+ The key: keys.api_advantage_key needs to be set in a enum first.
+ like this:
+ enum keys {
+      static var api_advantage_key = "YOURKEYHERE"
+ }
+ https://www.alphavantage.co/documentation/
  */
 
 import Foundation
@@ -22,24 +28,23 @@ class APIDataService: NSObject {
     return
       URL(string:"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=\(symbol)&apikey=\(keys.api_advantage_key)")!
   }
-  
-  
 
-  func getSingleQuote(symbol: String = "IBM", completion : @escaping (Response) -> () ) {
-    print ("i APIDataService.getSingleQuote")
+  func getSingleQuote(symbol: String, completion : @escaping (Quote) -> () ) {
     let url = makeSingleQuoteURL(symbol)
     let task = URLSession.shared.dataTask(with: url ) { data, response, error in
       if let data = data {
         let jsonDecoder = JSONDecoder()
         do {
-        let quoteData = try jsonDecoder.decode(Response.self, from: data)
-        completion(quoteData)
+        let dataIn = try jsonDecoder.decode(Response.self, from: data)
+            completion(dataIn.globalQuote)
         } catch {print(error)}
       }
     }
     task.resume()
   }
   
+    
+    
   func getCurrencyExchange(fromCurrency: String = "USD", ToCurrency: String = "DKK", completion : @escaping (Currencies) -> ()) {
    
     let url = MakeCurrencyEchangeURL(fromCurrency, ToCurrency)

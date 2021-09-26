@@ -8,36 +8,77 @@
 import Foundation
 
 class ViewModel : NSObject {
+
+  var bindVMtoController : (() -> ()) = {}
     
-    private var DataService : APIDataService!
-    
-    private(set) var quoteData : Response! {
+  private var DataService : APIDataService!
+  
+  override init() {
+      super.init()
+      DataService = APIDataService()
+      callFuncToGetQuoteData()
+  }
+
+  // indeholder data der skal vises i tableView
+  var tableData : [TableData] = [] {
+    didSet{
+       self.bindVMtoController()
+      
+//      print("--------------")
+//      print("Didset TableData: ")
+//      print (tableData)
+//      print("--------------")
+    }
+  }
+ 
+  
+  
+  private(set) var quoteData : Quote!  {
             didSet {
-                self.bindQuoteViewModelToController()
+              //self.bindVMtoController()
             }
         }
   
-    var bindQuoteViewModelToController : (() -> ()) = {}
 
-    
-    override init() {
-        super.init()
-        self.DataService = APIDataService()
-        callFuncToGetQuoteData()
-    }
-  
   
     func callFuncToGetQuoteData()  {
-    // print ("i callFuncToGetQuoteData")
-     // self.DataService.getSingleQuote {(quoteData) in print (quoteData) ; self.quoteData = quoteData  }
+      for symb in portfolioArray {
+        self.DataService.getSingleQuote ( symbol: symb.shareSymbol, completion: {(quoteData) in
+          print("--------------")
+          print("quoteData: ")
+            print(portfolioArray)
+         //   print(quoteData.price)
+          print("--------------")
+          self.tableData.append(TableData(Symbol: quoteData.symbol, Price: Double(quoteData.price) ?? 0))
+          //self.tableData.insert(contentsOf: [quoteData[0].symbol, symb.sharesBought, "","" ], at: 0)
+        } )
       
-      self.DataService.getSingleQuote ( symbol: "AAPL", completion: {(quoteData) in print(quoteData.globalQuote.symbol,quoteData.globalQuote.latestTradingDay)
-          self.quoteData = quoteData  } )
-      
-    }
+      }}
     
   
-}
+} // end of Class ViewModel
+
+
+/* struct TableData 
+let Symbol : String
+let Price : Double // the shareprice gotten from the APIDataservice
+let Units : Double // count af shares the user haves
+let CurrencyConvert : Double // if foreign currency; factor to multiply the amount with
+var Amount : Double // the moeny amount the user owns i the share
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class PortfolioViewModel {
   /* ***************************************************
@@ -45,7 +86,7 @@ class PortfolioViewModel {
    gemmes på disk imellem brug og indlæses ved app start.
    
   listen gennemgåes (i en anden class) ved hver opstart, samt engang om dagen,
-  samt når bruger fremtvinger en refresj
+  samt når bruger fremtvinger en refresh
    
   ********************************************************/
   
@@ -57,25 +98,12 @@ class PortfolioViewModel {
   //TODO:
  }
   
-  func createNewShareToFiolioList(symbol: String, bought: String, amount: String, price: String) -> Void {
-    
-    folioList.append(Portfolio(shareSymbol: symbol, shareDateBought: bought, sharesBought: amount, sharePrice: price))
-    
-    print(folioList)
-  }
-  
-  func createTestData(){
-    // MARK: only used for testing
-    folioList.append(Portfolio(shareSymbol: "IBM", shareDateBought: "2020-02-03",
-                               sharesBought: "22", sharePrice: "123"))
-    folioList.append(Portfolio(shareSymbol: "APPL", shareDateBought: "2019-09-14",
-                               sharesBought: "11", sharePrice: "149"))
-    folioList.append(Portfolio(shareSymbol: "GM", shareDateBought: "2012-12-01",
-                               sharesBought: "33", sharePrice: "12.3"))
-    
-    print(folioList)
-    
-  }
+//  func createNewShareToFiolioList(symbol: String, bought: String, amount: String, price: String) -> Void {
+//
+//    folioList.append(Portfolio(shareSymbol: symbol, shareDateBought: bought, sharesBought: amount, sharePrice: price))
+//
+//    print(folioList)
+//  }
   
 }
 

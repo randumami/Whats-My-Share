@@ -13,17 +13,8 @@ class SetupViewController: UIViewController, UITableViewDataSource,UITableViewDe
   @IBOutlet weak var txtDateBought: UITextField!
   @IBOutlet weak var txtAmountBought: UITextField!
   @IBOutlet weak var txtSharePrice: UITextField!
+  @IBOutlet weak var txtShareName: UITextField!
   
-  @IBAction func btGemData(_ sender: Any) {
-    //MARK: Debug knap
-    storeInUserDefaults()
-  }
-  
-  @IBAction func btHentdata(_ sender: Any) {
-    //MARK: Debug knap
-    fetchFromUserDefault()
-    self.tableView.reloadData()
-  }
   
   @IBAction func btSave(_ sender: Any) {
   //her skal være validering af felter ikke er tommer
@@ -34,38 +25,27 @@ class SetupViewController: UIViewController, UITableViewDataSource,UITableViewDe
     saveNewShareToPortfolio()
     storeInUserDefaults()
     clearFieldsInView()
-   
   }
   
-  @IBOutlet weak var lblShareName: UILabel!
-  
+
   @IBOutlet  var tableView: UITableView!
 
   
   override func viewDidLoad() {
-        super.viewDidLoad()
-    
+    super.viewDidLoad()
     tableView.dataSource = self
     tableView.delegate = self
+    
     fetchFromUserDefault()
     
     //user to be able to move or delete a cell, and also tap on it to select
     tableView.allowsSelectionDuringEditing = true
+    
     DispatchQueue.main.async { [self] in
       self.tableView.reloadData()
      }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
   func clearFieldsInView()  {
     for case let textField as UITextField in self.view.subviews {
@@ -77,6 +57,7 @@ class SetupViewController: UIViewController, UITableViewDataSource,UITableViewDe
     // gemmer data fra de 4 felter i Struct Portfolio
     // men hvsi det skal mvvvm skal der opsættes Observer eller lignende
     
+    // TODO: SKal skrives om, Closure KVO eller andet.
     portfolioArray.append(Portfolio(shareSymbol: txtSymbol.text!,
                                     shareDateBought: txtDateBought.text!,
                                     sharesBought: txtAmountBought.text!,
@@ -85,10 +66,6 @@ class SetupViewController: UIViewController, UITableViewDataSource,UITableViewDe
     DispatchQueue.main.async { [self] in
       self.tableView.reloadData()
      }
-    
-
-  // print(portfolioArray)
-    
   }
   
   // MARK: - Table View
@@ -103,8 +80,6 @@ class SetupViewController: UIViewController, UITableViewDataSource,UITableViewDe
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "CELL", for: indexPath)
-
-    // let object = portfolioArray[indexPath.row]
     cell.textLabel!.text = portfolioArray[indexPath.row].shareSymbol
     
     return cell
@@ -117,17 +92,17 @@ class SetupViewController: UIViewController, UITableViewDataSource,UITableViewDe
 
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
-        //TODO: Slet den rette linje i Portfolio
-        
-        portfolioArray.remove(at: indexPath.row)
+            portfolioArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            storeInUserDefaults()
       } else if editingStyle == .insert {
           // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
       }
   }
   
-  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
   }
+  
+  
 }

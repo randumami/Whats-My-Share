@@ -3,9 +3,15 @@
 //  Whats My Share
 //
 //  Created by Søren Randum on 05/09/2021.
-//  DONE
+//  
 
  import Foundation
+/**
+ The Currencies Struct is where the relevant currency is placed when fetched from the API.
+ this is used when the user has shares in different currencies.
+ */
+
+//TODO: implement currency functionality
 
 struct Currencies: Decodable {
   let status : String

@@ -3,9 +3,14 @@
 //  Whats My Share
 //
 //  Created by Søren Randum on 05/09/2021.
-//  DONE
+//  
 
  import Foundation
+/**
+ The Quote Struct contains the feedback from the API, it isnonly used as a temporary placeholder
+ to decode the JSON.
+ */
+
 
 
 // MARK: - Response
