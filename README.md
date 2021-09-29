@@ -11,11 +11,11 @@ This project was created for me to play around with patterns MVVM and others. So
 if you do want to compile it ....
 
 ## remember to make an enum with you api key from https://www.alphavantage.co/support/#api-key
-
+```swift
  enum keys {
       static var api_advantage_key = "YOURKEYHERE"
  }
-
+```
 
 ### ToDO:
 - implement currency functionality, right now the exchange value is always 1.00 and everything is dollars
