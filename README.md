@@ -10,7 +10,7 @@ This project was created for me to play around with patterns MVVM and others. So
 
 if you do want to compile it ....
 
-##remember to make an enum with you api key from https://www.alphavantage.co/support/#api-key
+## remember to make an enum with you api key from https://www.alphavantage.co/support/#api-key
 
  enum keys {
       static var api_advantage_key = "YOURKEYHERE"
