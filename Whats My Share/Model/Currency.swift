@@ -30,9 +30,6 @@ struct CurrencyData: Decodable {
     case toCurrencyName   = "4. To_Currency Name"
     case exchangeRate     = "5. Exchange Rate"
   }
-  
-  
-  
 }
 
 

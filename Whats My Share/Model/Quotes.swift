@@ -42,6 +42,7 @@ struct Quote: Codable {
     }
 }
 
+
 /*
  example answer from server:
  Quote Endpoint
