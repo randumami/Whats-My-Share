@@ -8,7 +8,8 @@ This is a play project for me, so feel free to comment any code, should you stum
 
 This project was created for me to play around with patterns MVVM and others. So please dont expect everything to be functioning at all times.
 
-if you do want to compile it the ....
+if you do want to compile it ....
+
 ##remember to make an enum with you api key from https://www.alphavantage.co/support/#api-key
 
  enum keys {
