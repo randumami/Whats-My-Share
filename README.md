@@ -8,13 +8,14 @@ This is a play project for me, so feel free to comment any code, should you stum
 
 This project was created for me to play around with patterns MVVM and others. So please dont expect everything to be functioning at all times.
 
-if you do want to compile it the ....
-##remember to make an enum with you api key from https://www.alphavantage.co/support/#api-key
+if you do want to compile it ....
 
+## remember to make an enum with you api key from https://www.alphavantage.co/support/#api-key
+```swift
  enum keys {
       static var api_advantage_key = "YOURKEYHERE"
  }
-
+```
 
 ### ToDO:
 - implement currency functionality, right now the exchange value is always 1.00 and everything is dollars

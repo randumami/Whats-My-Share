@@ -13,7 +13,7 @@ import UIKit
 class TableViewDataSource : NSObject, UITableViewDataSource, UITableViewDelegate {
  
   var vModel = ViewModel()
-  
+    
   var strValue = Observer("")
   
   var amount = 0.0 {
@@ -42,11 +42,18 @@ class TableViewDataSource : NSObject, UITableViewDataSource, UITableViewDelegate
     cell.amountCell.text = "$\(String(format: "%.2f",share.Amount))"
     cell.changePercentCell?.text = share.ChangePercent
     
+    cell.changePercentCell.layer.masksToBounds = true
+    cell.changePercentCell.layer.cornerRadius = 10
+    cell.changePercentCell.sizeToFit()
+    cell.changePercentCell.textAlignment = .center
+    
     // color the label according to positive or negative
     if (share.ChangePercent.prefix(1) == "-") {
-      cell.changePercentCell.textColor = UIColor.red
+      cell.changePercentCell.backgroundColor = UIColor.red
+     // cell.changePercentCell.textColor = UIColor.systemPink
     } else {
-      cell.changePercentCell.textColor = UIColor.green
+      cell.changePercentCell.backgroundColor = UIColor.green
+     // cell.changePercentCell.textColor = UIColor.systemMint
     }
     
       // add border and color
@@ -79,6 +86,8 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     print("celle numer \(indexPath.row).")
+ 
+   
      }
   
 }
