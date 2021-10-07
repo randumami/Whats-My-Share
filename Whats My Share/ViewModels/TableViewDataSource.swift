@@ -40,6 +40,7 @@ class TableViewDataSource : NSObject, UITableViewDataSource, UITableViewDelegate
     cell.latestTradingDayCell?.text = share.LatestTradingDay
     cell.sharePriceCell?.text = "$\(share.Price)"
     cell.amountCell.text = "$\(String(format: "%.2f",share.Amount))"
+    
     cell.changePercentCell?.text = share.ChangePercent
     
     cell.changePercentCell.layer.masksToBounds = true
@@ -50,10 +51,8 @@ class TableViewDataSource : NSObject, UITableViewDataSource, UITableViewDelegate
     // color the label according to positive or negative
     if (share.ChangePercent.prefix(1) == "-") {
       cell.changePercentCell.backgroundColor = UIColor.red
-     // cell.changePercentCell.textColor = UIColor.systemPink
     } else {
       cell.changePercentCell.backgroundColor = UIColor.green
-     // cell.changePercentCell.textColor = UIColor.systemMint
     }
     
       // add border and color
