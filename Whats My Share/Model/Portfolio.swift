@@ -12,7 +12,7 @@
  */
 var  portfolioArray = [Portfolio]() {
     didSet{
-      //print (portfolioArray) // debug print
+    //
     }
 }
 
@@ -21,6 +21,8 @@ struct  Portfolio: Codable {
   let shareDateBought : String
   let sharesBought    : String
   let sharePrice      : String
+  
+  
   }
 
 
@@ -42,7 +44,6 @@ func fetchFromUserDefault(){
       do {
           let arr = try JSONDecoder().decode([Portfolio].self, from: data)
         portfolioArray = arr
-          print(arr)
       } catch {
           print(error)
       }

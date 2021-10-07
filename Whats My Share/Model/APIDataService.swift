@@ -37,7 +37,8 @@ class APIDataService: NSObject {
         do {
         let dataIn = try jsonDecoder.decode(Response.self, from: data)
             completion(dataIn.globalQuote)
-        } catch {print(error)}
+        } catch {
+          print("Error: ingen data fra Alphavantage, licens kun er til 5 opslag i minuttet")}
       }
     }
     task.resume()

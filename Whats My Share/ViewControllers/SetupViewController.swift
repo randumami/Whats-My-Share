@@ -36,8 +36,6 @@ class SetupViewController: UIViewController, UITableViewDataSource,UITableViewDe
     tableView.dataSource = self
     tableView.delegate = self
     
-    fetchFromUserDefault()
-    
     //user to be able to move or delete a cell, and also tap on it to select
     tableView.allowsSelectionDuringEditing = true
     
@@ -57,7 +55,7 @@ class SetupViewController: UIViewController, UITableViewDataSource,UITableViewDe
     // gemmer data fra de 4 felter i Struct Portfolio
     // men hvsi det skal mvvvm skal der opsættes Observer eller lignende
     
-    // TODO: SKal skrives om, Closure KVO eller andet.
+    // TODO: skal refactoreres 
     portfolioArray.append(Portfolio(shareSymbol: txtSymbol.text!,
                                     shareDateBought: txtDateBought.text!,
                                     sharesBought: txtAmountBought.text!,
